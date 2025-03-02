@@ -1,0 +1,152 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BMi Calculator</title>
+    
+    <style>
+        body,html{
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+}
+.container{
+    background-color: rgb(39, 45, 48);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box{
+    background-color: rgb(121, 152, 169);
+    padding: 30px 80px;
+    border: 4.5px solid rgb(69, 27, 138);
+    border-radius: 20px;
+    text-align: center;
+}
+h1{
+    color: rgb(32, 37, 40);
+}
+#gender{
+    height: 22px;
+    width: 22px;
+}
+#male,#female{
+    font-size: 25px;
+    color: rgb(4, 57, 100);
+}
+#age,#height,#weight{
+    color: rgb(16, 93, 157);
+    background-color: rgb(159, 193, 211);
+    font-size: 20px;
+    height: 37px;
+    width: 300px;
+    border: 3px solid rgb(27, 107, 172);
+    border-radius: 20px;
+    transition: transform 0.3s;
+}
+#age:hover,#height:hover,#weight:hover{
+    transform: scale(1.04);
+    color: rgb(65, 98, 242);
+    background-color: rgb(177, 218, 244);
+}
+button{
+    font-size: 24px;
+    font-weight: bold ;
+    color: rgb(17, 99, 165);
+    background-color: rgb(162, 208, 251);
+    height: 35px;
+    width: 150px;
+    border: 3px solid rgb(9, 101, 207);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.6s;
+}
+button:hover{
+    transform: scale(1.09);
+    color: rgb(203, 229, 255);
+    background-color: rgb(99, 115, 123);
+    border-color: rgba(208, 207, 199, 0.568);
+}
+p{
+    color: rgb(61, 33, 99);
+    font-size: 20px;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1><b><u>BMI CALCULATOR!!</u></b></h1><br>
+            <input type="radio" name="relate" id="gender"><span id="male">Male</span>
+            <input type="radio" name="relate" id="gender"><span id="female">Female</span><br><br>
+  
+            <input type="number" id="age" placeholder="Enter Age"><br><br>
+            <input type="number" id="height" placeholder="Enter Height In Cm"><br><br>
+            <input type="number" id="weight" placeholder="Enter Weight In Kg"><br><br>
+            <button onclick="calculate()">Calculate</button><br><br>
+            <p style="display: inline;" id="bmi"></p><br>
+            <p style="display: inline;" id="category"></p>
+        </div>
+    </div>
+    <script>
+        function calculate(){
+let H= parseFloat(document.getElementById("height").value);
+let W= parseFloat(document.getElementById("weight").value);
+H=H/100;
+let result = (W/(H*H));
+let roundValue=Math.round(result*100)/100;
+
+if(!H || !W){
+    document.getElementById("bmi").innerHTML= "Enter Valid Inputs";
+    document.getElementById("bmi").style.color= "#420303";
+    return;
+}
+let category="";
+let color="";
+
+if(result<16){
+    category="Severe Thin";
+    color="#990e0e";
+}
+else if(result > 16 && result < 17){
+    category="Moderate Thin";
+    color="#945f09";
+}
+else if(result > 17 && result < 18.5){
+    category="Mild Thin";
+    color="#fadf7f";
+}
+else if(result > 18.5 && result < 25){
+    category="Normal";
+    color="#0b6e13";
+}
+else if(result > 25 && result < 30){
+    category="Overweight";
+    color="#f7cf19";
+}
+else if(result > 30 && result < 35){
+    category="In : Obese Class I";
+    color="#d16638";
+}
+else if(result > 35 && result < 40){
+    category="In : Obese Class II";
+    color="#bf1515";
+}
+else if(result >40){
+    category="In : Obese Class III";
+    color="#8c0f0f";
+}
+
+let resulttext = "Your BMI : " + roundValue;
+let messagetext = "You Are " + category;
+
+document.getElementById("bmi").innerHTML= resulttext;
+document.getElementById("category").innerHTML= messagetext;
+document.getElementById("bmi").style.color= color;
+document.getElementById("category").style.color= color;
+}
+    </script>
+</body>
+</html>
+          
